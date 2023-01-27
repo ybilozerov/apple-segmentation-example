@@ -11,6 +11,8 @@
 		7D63AB3D2980748000EF6C47 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63AB3C2980748000EF6C47 /* ViewController.swift */; };
 		7D63AB3F2980748200EF6C47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D63AB3E2980748200EF6C47 /* Assets.xcassets */; };
 		7D63AB422980748200EF6C47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D63AB402980748200EF6C47 /* Main.storyboard */; };
+		7D63AB4B29807BC200EF6C47 /* CameraFramesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63AB4A29807BC200EF6C47 /* CameraFramesProvider.swift */; };
+		7D63AB4F298423E100EF6C47 /* CameraFramesProvider+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63AB4E298423E100EF6C47 /* CameraFramesProvider+Errors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		7D63AB3E2980748200EF6C47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D63AB412980748200EF6C47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7D63AB432980748200EF6C47 /* AppleSegmentationExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppleSegmentationExample.entitlements; sourceTree = "<group>"; };
+		7D63AB4A29807BC200EF6C47 /* CameraFramesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFramesProvider.swift; sourceTree = "<group>"; };
+		7D63AB4E298423E100EF6C47 /* CameraFramesProvider+Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraFramesProvider+Errors.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,7 @@
 		7D63AB392980748000EF6C47 /* AppleSegmentationExample */ = {
 			isa = PBXGroup;
 			children = (
+				7D63AB492980784900EF6C47 /* Data */,
 				7D63AB3A2980748000EF6C47 /* AppDelegate.swift */,
 				7D63AB3C2980748000EF6C47 /* ViewController.swift */,
 				7D63AB3E2980748200EF6C47 /* Assets.xcassets */,
@@ -59,6 +64,15 @@
 				7D63AB432980748200EF6C47 /* AppleSegmentationExample.entitlements */,
 			);
 			path = AppleSegmentationExample;
+			sourceTree = "<group>";
+		};
+		7D63AB492980784900EF6C47 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7D63AB4A29807BC200EF6C47 /* CameraFramesProvider.swift */,
+				7D63AB4E298423E100EF6C47 /* CameraFramesProvider+Errors.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,6 +147,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D63AB3D2980748000EF6C47 /* ViewController.swift in Sources */,
+				7D63AB4B29807BC200EF6C47 /* CameraFramesProvider.swift in Sources */,
+				7D63AB4F298423E100EF6C47 /* CameraFramesProvider+Errors.swift in Sources */,
 				7D63AB3B2980748000EF6C47 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,6 +290,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The camera may be used as a source for segmentation.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -300,6 +317,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "The camera may be used as a source for segmentation.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
