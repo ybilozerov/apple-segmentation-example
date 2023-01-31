@@ -14,6 +14,7 @@
 		7D63AB4B29807BC200EF6C47 /* CameraFramesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63AB4A29807BC200EF6C47 /* CameraFramesProvider.swift */; };
 		7D63AB4F298423E100EF6C47 /* CameraFramesProvider+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63AB4E298423E100EF6C47 /* CameraFramesProvider+Errors.swift */; };
 		7D63AB582986D13500EF6C47 /* OutputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63AB572986D13500EF6C47 /* OutputView.swift */; };
+		7D63AB5D298953F000EF6C47 /* VisionImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63AB5C298953F000EF6C47 /* VisionImageProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		7D63AB4A29807BC200EF6C47 /* CameraFramesProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraFramesProvider.swift; sourceTree = "<group>"; };
 		7D63AB4E298423E100EF6C47 /* CameraFramesProvider+Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CameraFramesProvider+Errors.swift"; sourceTree = "<group>"; };
 		7D63AB572986D13500EF6C47 /* OutputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputView.swift; sourceTree = "<group>"; };
+		7D63AB5C298953F000EF6C47 /* VisionImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionImageProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			children = (
 				7D63AB4A29807BC200EF6C47 /* CameraFramesProvider.swift */,
 				7D63AB4E298423E100EF6C47 /* CameraFramesProvider+Errors.swift */,
+				7D63AB5C298953F000EF6C47 /* VisionImageProcessor.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D63AB5D298953F000EF6C47 /* VisionImageProcessor.swift in Sources */,
 				7D63AB3D2980748000EF6C47 /* OutputViewController.swift in Sources */,
 				7D63AB4B29807BC200EF6C47 /* CameraFramesProvider.swift in Sources */,
 				7D63AB4F298423E100EF6C47 /* CameraFramesProvider+Errors.swift in Sources */,

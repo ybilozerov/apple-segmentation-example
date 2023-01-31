@@ -15,8 +15,10 @@ class OutputViewController: NSViewController {
     
     @IBOutlet private weak var outputView: OutputView!
     
-    private var framesProvider = CameraFramesProvider()
+    private let framesProvider = CameraFramesProvider()
     private var isFramesProviderPrepared: Bool = false
+    
+    private let imageProcessor = VisionImageProcessor()
     
     private var metalSetupError: OutputView.MetalSetupError?
     
@@ -61,7 +63,14 @@ class OutputViewController: NSViewController {
 extension OutputViewController: CameraFramesProviderDelegate {
     
     func framesProvider(_ provider: CameraFramesProvider, didOutput imageBuffer: CVImageBuffer) {
-        outputView.image = CIImage(cvImageBuffer: imageBuffer)
+        let pixelBuffer = imageBuffer as CVPixelBuffer
+        do {
+            let image = try imageProcessor.processPixelBuffer(pixelBuffer)
+            outputView.image = image
+        }
+        catch {
+            os_log("%@", String(describing: error))
+        }
     }
 }
 

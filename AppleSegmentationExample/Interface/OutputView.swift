@@ -26,7 +26,7 @@ class OutputView: NSView {
     
     private lazy var ciContext: CIContext? = {
         guard let metalDevice else { return nil }
-        return CIContext(mtlDevice: metalDevice)
+        return .init(mtlDevice: metalDevice)
     }()
     
     private let colorSpace = CGColorSpaceCreateDeviceRGB()
