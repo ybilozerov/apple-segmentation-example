@@ -687,7 +687,6 @@
                 <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="Vision" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
@@ -702,14 +701,28 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--Output View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="AppleSegmentationExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="OutputViewController" customModule="AppleSegmentationExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="5YK-4v-b05" customClass="OutputView" customModule="AppleSegmentationExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5YK-4v-b05" secondAttribute="trailing" id="W7l-iy-5vR"/>
+                            <constraint firstAttribute="bottom" secondItem="5YK-4v-b05" secondAttribute="bottom" id="YJR-lm-umb"/>
+                            <constraint firstItem="5YK-4v-b05" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="sQH-CU-bFd"/>
+                            <constraint firstItem="5YK-4v-b05" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="ssq-ZS-yNs"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="outputView" destination="5YK-4v-b05" id="WLH-XA-VIL"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
