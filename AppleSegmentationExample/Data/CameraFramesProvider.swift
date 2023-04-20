@@ -28,7 +28,7 @@ class CameraFramesProvider: NSObject {
     private var captureSession: AVCaptureSession?
     private lazy var sampleBuffersProcessingQueue: DispatchQueue = {
         .init(
-            label: "com.ybilozerov.applesegmentationexample.samplebufferprocessingqueue",
+            label: "CameraFramesProvider.sampleBuffersProcessingQueue",
             qos: .userInteractive
         )
     }()
@@ -129,7 +129,7 @@ extension CameraFramesProvider {
     }
 }
 
-// MARK: - AVCaptureVideoDataOutputSampleBufferDelegate {
+// MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
 
 extension CameraFramesProvider: AVCaptureVideoDataOutputSampleBufferDelegate {
     
