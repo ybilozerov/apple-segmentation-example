@@ -6,9 +6,9 @@
 //  Copyright © 2023 Yurii Bilozerov. All rights reserved.
 //
 
-import Foundation
 import Cocoa
 import MetalKit
+import os
 
 class OutputView: NSView {
     
@@ -20,7 +20,15 @@ class OutputView: NSView {
         }
     }
     
-    private let metalView = MTKView()
+    var allowsTransparency: Bool {
+        get { metalView.allowsTransparency }
+        set {
+            metalView.allowsTransparency = newValue
+            metalView.draw() // Redraw in case of static contents
+        }
+    }
+    
+    private let metalView = MetalView()
     private let metalDevice = MTLCreateSystemDefaultDevice()
     private lazy var metalCommandQueue = metalDevice?.makeCommandQueue()
     
@@ -73,12 +81,17 @@ extension OutputView: MTKViewDelegate {
         
         // TODO: Implement different content modes
         // Scale image to fill Metal view
-        let drawSize = metalView.drawableSize
-        let scaleX = drawSize.width / image.extent.width
-        let scaleY = drawSize.height / image.extent.height
+        let drawableSize = view.drawableSize
+        let scaleX = drawableSize.width / image.extent.width
+        let scaleY = drawableSize.height / image.extent.height
         
         let scaledImage = image.transformed(by: .init(scaleX: scaleX, y: scaleY))
         
+        // Clear drawable to make a metal view transparent
+        if allowsTransparency {
+            clearDrawable(currentDrawable, drawableSize: drawableSize, ciContext: ciContext, commandBuffer: commandBuffer)
+        }
+                
         // Render image to the drawable
         ciContext.render(
             scaledImage,
@@ -94,7 +107,29 @@ extension OutputView: MTKViewDelegate {
     }
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        // This delegate method is required
+        // This delegate method is required but currently unused
+    }
+}
+
+// MARK: - Private
+
+private extension OutputView {
+    
+    func clearDrawable(_ drawable: CAMetalDrawable, drawableSize: CGSize, ciContext: CIContext, commandBuffer: MTLCommandBuffer) {
+        let renderDestination = CIRenderDestination(
+            width: Int(drawableSize.width),
+            height: Int(drawableSize.height),
+            pixelFormat: drawable.texture.pixelFormat,
+            commandBuffer: commandBuffer) { () -> MTLTexture in
+                drawable.texture
+            }
+        
+        do {
+            try ciContext.startTask(toClear: renderDestination)
+        }
+        catch {
+            os_log("%@", String(describing: error))
+        }
     }
 }
 
@@ -113,5 +148,32 @@ extension OutputView {
         var recoverySuggestion: String? {
             return "The app can't work without Metal and will be terminated."
         }
+    }
+}
+
+// MARK: - Metal View
+
+private class MetalView: MTKView {
+    
+    var allowsTransparency: Bool = true {
+        didSet {
+            updateAllowsTransparency()
+        }
+    }
+    
+    override var isOpaque: Bool {
+        !allowsTransparency
+    }
+    
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        
+        if window != nil {
+            updateAllowsTransparency()
+        }
+    }
+    
+    func updateAllowsTransparency() {
+        layer?.isOpaque = isOpaque
     }
 }

@@ -134,7 +134,9 @@ extension CameraFramesProvider {
 extension CameraFramesProvider: AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        if output is AVCaptureVideoDataOutput, let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer), let delegate {
+        guard let delegate, let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+        
+        autoreleasepool {
             delegate.framesProvider(self, didOutput: imageBuffer)
         }
     }

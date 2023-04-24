@@ -8,12 +8,25 @@
 
 import Foundation
 import Vision
-import CoreImage.CIFilterBuiltins
+import CoreImage
+
+// MARK: - Errors
+
+extension VisionImageProcessor {
+    enum ProcessingError: Error {
+        case cannotObtainMask
+        case cannotApplyMask
+    }
+}
 
 class VisionImageProcessor {
     
+    // MARK: - Properties
+    
     private let requestHandler = VNSequenceRequestHandler()
     private let segmentationRequest = VNGeneratePersonSegmentationRequest()
+    
+    // MARK: - Lifecycle
     
     init() {
         segmentationRequest.qualityLevel = .balanced
@@ -38,30 +51,18 @@ extension VisionImageProcessor {
         // Create required CIImage objects
         let image = CIImage(cvPixelBuffer: pixelBuffer)
         var maskImage = CIImage(cvPixelBuffer: maskPixelBuffer)
-        let backgroundImage = CIImage.black.cropped(to: image.extent)
         
         // Scale the mask image
         let scaleX = image.extent.width / maskImage.extent.width
         let scaleY = image.extent.height / maskImage.extent.height
         maskImage = maskImage.transformed(by: .init(scaleX: scaleX, y: scaleY))
         
-        // Blend background/input images according to the mask
-        let blendFilter = CIFilter.blendWithRedMask()
-        blendFilter.backgroundImage = backgroundImage
-        blendFilter.inputImage = image
-        blendFilter.maskImage = maskImage
+        // Apply mask to the input image
+        let maskFilter = AlphaMaskFilter()
+        maskFilter.inputImage = image
+        maskFilter.maskImage = maskImage
         
-        guard let outputImage = blendFilter.outputImage else { throw ProcessingError.cannotBlendImages }
+        guard let outputImage = maskFilter.outputImage else { throw ProcessingError.cannotApplyMask }
         return outputImage
-    }
-}
-
-// MARK: - Errors
-
-extension VisionImageProcessor {
-    
-    enum ProcessingError: Error {
-        case cannotObtainMask
-        case cannotBlendImages
     }
 }
